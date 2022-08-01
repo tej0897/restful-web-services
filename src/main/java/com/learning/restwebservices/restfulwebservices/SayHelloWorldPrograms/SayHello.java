@@ -1,4 +1,4 @@
-package com.learning.restwebservices.restfulwebservices;
+package com.learning.restwebservices.restfulwebservices.SayHelloWorldPrograms;
 
 public class SayHello {
     private String message;
