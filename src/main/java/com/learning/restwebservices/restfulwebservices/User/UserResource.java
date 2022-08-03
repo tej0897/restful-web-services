@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URL;
 import java.util.List;
@@ -33,15 +34,16 @@ public class UserResource {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<Object> addUser(@RequestBody User user){
+    public ResponseEntity<Object> addUser(@Valid @RequestBody User user){
         User savedUser =  service.saveUser(user);
 
-        URI location = ServletUriComponentsBuilder
+        URI location = ServletUriComponentsBuilder  //get location to pass in ResponseEntity
                 .fromCurrentRequest()
                 .path("{/id}")
                 .buildAndExpand(savedUser.getId()).toUri();
         
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.created(location).build();        // responseEntity is used to get the status code for an OP.
+                                                            // 201 for created, 200 for success etc.
     }
 
     @DeleteMapping("/users/{id}")

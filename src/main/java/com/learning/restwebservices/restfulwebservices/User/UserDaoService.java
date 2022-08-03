@@ -41,12 +41,14 @@ public class UserDaoService {
     }
 
     public User deleteById(int id) {
-        Iterator <User> iterator = users.iterator();
-        while (iterator.hasNext());
-        User user = iterator.next();
-        if (user.getId() == id) {
-            iterator.remove();
-            return user;
+        Iterator<User> iterator = users.iterator();
+        while (iterator.hasNext()) {
+            User user = iterator.next();
+            if (user.getId() == id) {
+                iterator.remove();
+                return user;
+            }
+
         }
         return null;
     }
