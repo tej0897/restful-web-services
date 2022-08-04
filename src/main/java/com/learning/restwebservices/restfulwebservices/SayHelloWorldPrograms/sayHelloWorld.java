@@ -1,11 +1,14 @@
 package com.learning.restwebservices.restfulwebservices.SayHelloWorldPrograms;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class sayHelloWorld {
-
-
+    @Autowired
+    private MessageSource messageSource;
 
     @GetMapping("/sayhello")
     //  @RequestMapping(method = RequestMethod.GET, path = "/sayhello") -- use this also.
@@ -21,5 +24,11 @@ public class sayHelloWorld {
     @GetMapping("/sayhello/{name}")
     public String sayHelloUsingParamateres( @PathVariable String name){
         return ("Hello : "+name);
+    }
+
+    @GetMapping("/sayhello/intn")
+    public String sayHelloInternationalized(){
+
+        return messageSource.getMessage("good.morning.message", null, LocaleContextHolder.getLocale());
     }
 }
